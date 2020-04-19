@@ -1,6 +1,4 @@
-//Credits
-//Music by: Sirius Beat - The Cosmos (Link: http://youtu.be/Bkg08NvtvBU)
-//
+
 
 class Play extends Phaser.Scene{
     constructor(){
@@ -13,9 +11,13 @@ class Play extends Phaser.Scene{
         this.load.image("spaceship","./assets/spaceship.png");
         this.load.image("starfield","./assets/starfield.png");
         this.load.spritesheet("explosion", "./assets/explosion.png", {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
+        this.load.image("planet1", "./assets/starfield.png");
     }
 
     create(){
+        console.log("playing music");
+        this.sound.play("music");
+
 
         //timer variables
         this.tempDate = new Date();
@@ -86,16 +88,7 @@ class Play extends Phaser.Scene{
     
         // game over flag
         this.gameOver = false;
-        /*
-        // 60-second play clock
-        scoreConfig.fixedWidth = 0;
-        this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
-            this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
-            this.add.text(game.config.width/2, game.config.height/2 + 64, '(F)ire to Restart or <-f for Menu', scoreConfig).setOrigin(0.5);
-            this.gameOver = true;
-            game.settings.spaceshipSpeed - game.settings.spaceshipSpeed/2;
-        }, null, this);
-*/
+        
         //timer to double speed after half of original time has passed
         this.timer = this.time.delayedCall(game.settings.gameTimer/2, () => {
             game.settings.spaceshipSpeed =  game.settings.spaceshipSpeed * 2; 
