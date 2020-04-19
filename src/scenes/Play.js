@@ -1,3 +1,7 @@
+//Credits
+//Music by: Sirius Beat - The Cosmos (Link: http://youtu.be/Bkg08NvtvBU)
+//
+
 class Play extends Phaser.Scene{
     constructor(){
         super("playScene");
