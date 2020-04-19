@@ -19,6 +19,7 @@ class Play extends Phaser.Scene{
 
     create(){
         console.log("playing music");
+        //play music
         this.sound.play("music");
 
 
