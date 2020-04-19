@@ -13,7 +13,6 @@ class Play extends Phaser.Scene{
 
     create(){
 
-
         //timer variables
         this.tempDate = new Date();
         this.startTime = this.tempDate.getTime();
@@ -62,7 +61,7 @@ class Play extends Phaser.Scene{
         this.p1Score = 0;
 
         // score display
-        let scoreConfig = {
+        this.scoreConfig = {
             fontFamily: 'Courier',
             fontSize: '28px',
             backgroundColor: '#F3B141',
@@ -75,33 +74,37 @@ class Play extends Phaser.Scene{
             fixedWidth: 100
         }
         //score display
-        this.scoreLeft = this.add.text(69, 54, this.p1Score, scoreConfig);
+        this.scoreLeft = this.add.text(69, 54, this.p1Score, this.scoreConfig);
 
         //timer display
-        this.remTimeDisp = this.add.text(config.width/2, 54, this.remTime, scoreConfig);
+        this.remTimeDisp = this.add.text(config.width/2, 54, this.remTime, this.scoreConfig);
         
     
         // game over flag
         this.gameOver = false;
-    
+        /*
         // 60-second play clock
         scoreConfig.fixedWidth = 0;
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
             this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
             this.add.text(game.config.width/2, game.config.height/2 + 64, '(F)ire to Restart or <-f for Menu', scoreConfig).setOrigin(0.5);
             this.gameOver = true;
+            game.settings.spaceshipSpeed - game.settings.spaceshipSpeed/2;
         }, null, this);
-
-        //timer to double speed after 30 seconds
+*/
+        //timer to double speed after half of original time has passed
         this.timer = this.time.delayedCall(game.settings.gameTimer/2, () => {
-            game.settings.spaceshipSpeed =  game.settings.spaceshipSpeed * 2}
-        , null, this);
+            game.settings.spaceshipSpeed =  game.settings.spaceshipSpeed * 2; 
+            console.log("speed changed");
+        }, null, this);
     }
 
     update(){
         // check key input for restart
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyF)) {
             this.scene.restart(this.p1Score);
+            this.tempDate = new Date();
+            this.startTime = this.tempDate.getTime();
         }
 
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
@@ -142,6 +145,15 @@ class Play extends Phaser.Scene{
         this.remTime = (game.settings.gameTimer - (this.curTime - this.startTime))/1000;
         this.remTime = Math.ceil(this.remTime);
         this.remTimeDisp.text = this.remTime;
+
+
+        //ends game if there is no remaining time
+        if(this.remTime < 0){
+            this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', this.scoreConfig).setOrigin(0.5);
+            this.add.text(game.config.width/2, game.config.height/2 + 64, '(F)ire to Restart or <-f for Menu', this.scoreConfig).setOrigin(0.5);
+            this.gameOver = true;
+            game.settings.spaceshipSpeed - game.settings.spaceshipSpeed/2;
+        }
     }
 
     checkCollision(rocket, ship){
@@ -175,7 +187,8 @@ class Play extends Phaser.Scene{
         this.scoreLeft.text = this.p1Score;
 
         //add time to timer depending on points
-        game.settings.gameTimer += Math.ceil(ship.points/10);
+        game.settings.gameTimer += Math.ceil(ship.points/10) * 1000;
+        console.log("adding time" + game.settings.gameTimer);
         
         this.sound.play('sfx_explosion');
     }

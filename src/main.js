@@ -1,3 +1,9 @@
+//Mods made:
+//UI timer +15
+//speed increase after half time passed +10
+//time added for hitting ships +25
+//move rocket after firing + 10
+
 let config = {
     type: Phaser.CANVAS,
     width: 640,
