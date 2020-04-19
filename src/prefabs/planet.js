@@ -1,4 +1,4 @@
-class Planet extends Phaser.GameObjects.Sprite{
+class planet extends Phaser.GameObjects.Sprite{
     constructor(scene, x, y, texture, frame, movespeed){
         super(scene, x, y, texture, frame);
 
