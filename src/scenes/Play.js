@@ -11,7 +11,10 @@ class Play extends Phaser.Scene{
         this.load.image("spaceship","./assets/spaceship.png");
         this.load.image("starfield","./assets/starfield.png");
         this.load.spritesheet("explosion", "./assets/explosion.png", {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
-        this.load.image("planet1", "./assets/starfield.png");
+        this.load.image("planet1", "./assets/Earth.png");
+        this.load.image("planet2", "./assets/Mars.png");
+        this.load.image("planet3", "./assets/Moon.png");
+
     }
 
     create(){
@@ -26,10 +29,11 @@ class Play extends Phaser.Scene{
         this.remTime = (game.settings.gameTimer - (this.curTime - this.startTime))/1000;
         this.remtime = Math.ceil(this.remTime);
 
-        
-
         //Place tile sprite
         this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0,0);
+
+        //Add bakcground planets
+        this.planet1 = new planet(this, 0, 420, "planet1").setOrigin(0,0);
 
         //white rectangle borders
         this.add.rectangle(5, 5 , 630, 32, 0xFFFFFF).setOrigin(0,0);
