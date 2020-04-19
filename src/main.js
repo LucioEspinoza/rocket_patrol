@@ -4,6 +4,9 @@
 //time added for hitting ships +25
 //move rocket after firing +10
 //music added to play scene +10
+//parallax scrolling planets +15
+//background menu image +15
+//total: 100
 
 //Credits
 //Music by: Sirius Beat - The Cosmos (Link: http://youtu.be/Bkg08NvtvBU)

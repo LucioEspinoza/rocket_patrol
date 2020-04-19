@@ -11,7 +11,7 @@ class Play extends Phaser.Scene{
         this.load.image("spaceship","./assets/spaceship.png");
         this.load.image("starfield","./assets/starfield.png");
         this.load.spritesheet("explosion", "./assets/explosion.png", {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
-        this.load.image("planet1", "./assets/Earth.png");
+        this.load.image("planet1", "./assets/Jupiter.png");
         this.load.image("planet2", "./assets/Mars.png");
         this.load.image("planet3", "./assets/Moon.png");
 
@@ -76,7 +76,7 @@ class Play extends Phaser.Scene{
         // score display
         this.scoreConfig = {
             fontFamily: 'Courier',
-            fontSize: '28px',
+            fontSize: '14px',
             backgroundColor: '#F3B141',
             color: '#843605',
             align: 'right',
@@ -149,19 +149,21 @@ class Play extends Phaser.Scene{
 
 
         //update timer variables
-        this.tempDate = new Date();
-        this.curTime = this.tempDate.getTime();
-        this.remTime = (game.settings.gameTimer - (this.curTime - this.startTime))/1000;
-        this.remTime = Math.ceil(this.remTime);
-        this.remTimeDisp.text = this.remTime;
+        if(!this.gameOver){
+            this.tempDate = new Date();
+            this.curTime = this.tempDate.getTime();
+            this.remTime = (game.settings.gameTimer - (this.curTime - this.startTime))/1000;
+            this.remTime = Math.ceil(this.remTime);
+            this.remTimeDisp.text = this.remTime;
+        }
 
 
         //ends game if there is no remaining time
-        if(this.remTime < 0){
+        if(this.remTime < 0 && this.gameOver == false){
             this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', this.scoreConfig).setOrigin(0.5);
             this.add.text(game.config.width/2, game.config.height/2 + 64, '(F)ire to Restart or <-f for Menu', this.scoreConfig).setOrigin(0.5);
             this.gameOver = true;
-            game.settings.spaceshipSpeed - game.settings.spaceshipSpeed/2;
+            game.settings.spaceshipSpeed = game.settings.spaceshipSpeed/2;
         }
     }
 

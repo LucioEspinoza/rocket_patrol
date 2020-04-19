@@ -9,9 +9,6 @@ class Spaceship extends Phaser.GameObjects.Sprite{
     }
     
     update(){
-
-        
-
         //console.log(game.settings.spaceshipSpeed);
 
         //move spaceship

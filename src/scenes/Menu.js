@@ -10,6 +10,7 @@ class Menu extends Phaser.Scene{
         this.load.audio('sfx_rocket', './assets/rocket_shot.wav');
         console.log("Loading music");
         this.load.audio("music", "./assets/Cosmos.mp3");
+        this.load.image("earth", "./assets/Earth.png");
     }
 
     create(){
@@ -26,6 +27,8 @@ class Menu extends Phaser.Scene{
             },
             fixedWidth: 0
         }
+
+        this.add.image(game.config.width/2, game.config.height/2, "earth");
 
         //show menu text
         let centerX = game.config.width/2;
