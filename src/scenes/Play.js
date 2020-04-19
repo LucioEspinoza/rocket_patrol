@@ -33,7 +33,9 @@ class Play extends Phaser.Scene{
         this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0,0);
 
         //Add bakcground planets
-        this.planet1 = new Planet(this, 0, 332, "planet1", 0, 1).setOrigin(0,0);
+        this.planet1 = new Planet(this, 0, 310, "planet1", 0, 0.5).setOrigin(0,0);
+        this.planet2 = new Planet(this, -20, 277, "planet2", 0, 2).setOrigin(0,0);
+        this.planet3 = new Planet(this, -30, 164, "planet3", 0, 1).setOrigin(0,0);
 
         //white rectangle borders
         this.add.rectangle(5, 5 , 630, 32, 0xFFFFFF).setOrigin(0,0);
@@ -115,9 +117,11 @@ class Play extends Phaser.Scene{
         //scroll starfield
         this.starfield.tilePositionX -= 3;
 
-        //scroll planet
+        //scroll planets
         this.planet1.update();
-        
+        this.planet2.update();
+        this.planet3.update();
+
         if(!this.gameOver){
             //update rocket
             this.p1Rocket.update();
